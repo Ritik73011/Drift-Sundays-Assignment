@@ -1,9 +1,13 @@
 import {Box} from '@mui/material'
-import Navbar from '../components/Navbar/Navbar'
+import HomeRightSide from '../components/HomeRightSide/HomeRightSide'
+import HomeSideBar from '../components/HomeSideBar/HomeSideBar'
 const Home = () => {
   return (
     <Box>
-        <Navbar/>
+        <Box sx={{display:"flex"}}>
+          <HomeSideBar/>
+          <HomeRightSide/>
+        </Box>
     </Box>
   )
 }

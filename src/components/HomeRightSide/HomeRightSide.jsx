@@ -1,7 +1,18 @@
 import { Box, Typography,Slide } from "@mui/material";
-import React from "react";
-
+import {database,ref,onValue} from '../../config/config'
+import { useEffect, useState } from "react";
 const HomeRightSide = () => {
+  const [data,setData] = useState({});
+  const starCountRef = ref(database, "Home/");
+  const [video,setVideo] = useState();
+
+  useEffect(()=>{
+    onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      setData(data);
+      setVideo(data.mainVideo);
+    });
+  },[])
   return (
     <Box sx={{ width: "100%" }}>
       <Slide direction="down" in mountOnEnter unmountOnExit>
@@ -14,10 +25,11 @@ const HomeRightSide = () => {
           backgroundSize: "cover",
         }}
       >
-        <video
+        {data.mainVideo?<video
           autoPlay
           loop
           muted
+          preload="auto"
           style={{
             width: "100%",
             minHeight: "73vh",
@@ -27,10 +39,10 @@ const HomeRightSide = () => {
           }}
         >
           <source
-            src="https://firebasestorage.googleapis.com/v0/b/agumentik-company.appspot.com/o/ezgif-5-06a53791e7.webm?alt=media&token=2d83a14c-4700-4891-aaaf-6e2aaace8a96"
+            src={video}
             type="video/mp4"
           />
-        </video>
+        </video>:null}
       </Box>
       </Slide>
       <Slide direction="up" in mountOnEnter unmountOnExit>
@@ -38,13 +50,13 @@ const HomeRightSide = () => {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          height: "18vh",
+          height: "18.3vh",
         }}
       >
         <Box
           sx={{
             background:
-              "url('https://firebasestorage.googleapis.com/v0/b/agumentik-company.appspot.com/o/d1.jpeg?alt=media&token=9ed25e24-e4dd-4c8a-9a96-4b68f6d0a78d')",
+              `url('${data.bottomImg1}')`,
             backgroundSize: "cover",
             width: "100%",
           }}
@@ -60,14 +72,14 @@ const HomeRightSide = () => {
             }}
           >
             <Typography sx={{ color: "white",fontSize:"14px",fontWeight:"bolder", padding: "24px 12px" }}>
-              ONE OF THE BEST TRACKS
+              {data.bottomTitle1}
             </Typography>
           </Box>
         </Box>
         <Box
           sx={{
             background:
-              "url('https://firebasestorage.googleapis.com/v0/b/agumentik-company.appspot.com/o/d2.jpg?alt=media&token=d8590219-1649-42fa-9c06-e9c681b212f3')",
+            `url('${data.bottomImg2}')`,
             backgroundSize: "cover",
             width: "100%",
           }}
@@ -83,14 +95,14 @@ const HomeRightSide = () => {
             }}
           >
             <Typography sx={{ color: "white",fontSize:"14px",fontWeight:"bolder", padding: "24px 12px" }}>
-              TRAINING ALL YEAR ROUND
+              {data.bottomTitle2}
             </Typography>
           </Box>
         </Box>
         <Box
           sx={{
             background:
-              "url('https://firebasestorage.googleapis.com/v0/b/agumentik-company.appspot.com/o/d3.jpg?alt=media&token=68520091-9da7-47d8-bad1-d69b50f1fbd8')",
+            `url('${data.bottomImg3}')`,
             backgroundSize: "cover",
             width: "100%",
           }}
@@ -106,7 +118,7 @@ const HomeRightSide = () => {
             }}
           >
             <Typography sx={{ color: "white",fontSize:"14px",fontWeight:"bolder", padding: "24px 12px" }}>
-              POWERFUL CARS
+              {data.bottomTitle3}
             </Typography>
           </Box>
         </Box>

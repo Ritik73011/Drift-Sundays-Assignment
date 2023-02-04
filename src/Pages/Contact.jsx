@@ -5,7 +5,9 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Modal from "@mui/material/Modal";
-import { useState } from "react";
+
+import { database, ref, onValue,set } from "../config/config";
+import { useEffect, useState } from "react";
 
 const style = {
   position: "absolute",
@@ -23,11 +25,61 @@ const Contact = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [data, setData] = useState({});
+  const [social, setSocial] = useState({});
+  const starCountRef = ref(database, "Contact/");
+  const socialRef = ref(database, "SocialLinks/");
+
+  const faceClick = () => {
+    window.open(social.facebook, "_blank");
+  };
+  const instaClick = () => {
+    window.open(social.instagram, "_blank");
+  };
+  const linkClick = () => {
+    window.open(social.linkedin, "_blank");
+  };
+
+  const [inputData,setInputData] = useState({});
+  const handleChange = (e)=>{
+    let name = e.target.name;
+    let value = e.target.value;
+    setInputData({...inputData,[name]:value});
+  }
+  const handleClick = ()=>{
+    if(inputData.name==="" || inputData.number==="  "){
+     alert("name is empty!");
+    }
+    else if(inputData.number===""||inputData.number==="  "|| inputData.number.length<10){
+      alert("number is wrong!")
+    }
+    else{
+      set(ref(database, 'users/'+inputData.number), {
+        name: inputData.name,
+        email: inputData.number,
+      });
+      alert("thanku😊 we will contact you soon...")
+      handleClose();
+    }
+  }
+
+  useEffect(() => {
+    onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      setData(data);
+    });
+
+    onValue(socialRef, (snapshot) => {
+      const data = snapshot.val();
+      setSocial(data);
+    });
+  }, []);
+
   return (
     <Box
       sx={{
-        background:
-          "url('https://firebasestorage.googleapis.com/v0/b/agumentik-company.appspot.com/o/drift-cars-black-and-white-nissan-8ti3r62yfoib2uxf.jpg?alt=media&token=de014d92-0840-4dd5-a300-4ca31c8394bd')",
+        background: `url('${data.cover}')`,
         backgroundSize: "cover",
         color: "white",
         minHeight: "91vh",
@@ -48,14 +100,7 @@ const Contact = () => {
           CONTACTS
         </Typography>
 
-        <Typography sx={{ margin: "16px 0" }}>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus
-          neque praesentium aperiam rerum! Temporibus, sapiente? Facere delectus
-          nesciunt provident aut maiores. Voluptas autem distinctio est, fugit
-          veniam voluptates neque laudantium ea ipsum fugiat sapiente at
-          consequuntur quasi numquam odio aliquam enim ipsam quod asperiores vel
-          dignissimos! Libero illum possimus facilis.
-        </Typography>
+        <Typography sx={{ margin: "16px 0" }}>{data.aboutCompany}</Typography>
         <Typography sx={{ paddingTop: "16px" }}>
           We work daily from 9am till 6pm.
         </Typography>
@@ -68,7 +113,7 @@ const Contact = () => {
           }}
         >
           <AddIcCallIcon sx={{ color: "#ffe900" }} />
-          <Typography sx={{ color: "#ffe900" }}>+919304613678</Typography>
+          <Typography sx={{ color: "#ffe900" }}>+91{data.phoneNum}</Typography>
         </Box>
         <Box
           sx={{
@@ -79,9 +124,7 @@ const Contact = () => {
           }}
         >
           <EmailIcon sx={{ color: "#ffe900" }} />
-          <Typography sx={{ color: "#ffe900" }}>
-            ritikkumarsingh730@gmail.com
-          </Typography>
+          <Typography sx={{ color: "#ffe900" }}>{data.email}</Typography>
         </Box>
 
         <Box
@@ -95,14 +138,17 @@ const Contact = () => {
           }}
         >
           <FacebookIcon
+            onClick={faceClick}
             fontSize="large"
             sx={{ color: "#0883e8", cursor: "pointer" }}
           />
           <InstagramIcon
+            onClick={instaClick}
             fontSize="large"
             sx={{ color: "#e83a55", cursor: "pointer" }}
           />
           <LinkedInIcon
+            onClick={linkClick}
             fontSize="large"
             sx={{ color: "#0073b1", cursor: "pointer" }}
           />
@@ -144,6 +190,8 @@ const Contact = () => {
                   fullWidth
                   label="Name"
                   id="fullWidth"
+                  onChange={handleChange}
+                  name='name'
                 />
                 <TextField
                   type="number"
@@ -151,6 +199,8 @@ const Contact = () => {
                   fullWidth
                   label="Number"
                   id="fullWidth"
+                  onChange={handleChange}
+                  name='number'
                 />
 
                 <Button
@@ -160,9 +210,10 @@ const Contact = () => {
                     color: "black",
                     fontWeight: "bolder",
                     background: "#ffe900",
-                    ":hover": { background: "green"},
-                    marginTop: "16px" 
+                    ":hover": { background: "green" },
+                    marginTop: "16px",
                   }}
+                  onClick={handleClick}
                 >
                   SUBMIT
                 </Button>

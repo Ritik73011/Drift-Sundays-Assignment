@@ -1,20 +1,47 @@
 import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import {database,ref,onValue} from '../../config/config'
+import { useEffect, useState } from "react";
 const HomeSideBar = () => {
+  const [data,setData] = useState({});
+  const [social,setSocial] = useState({});
+  const starCountRef = ref(database, "Home/");
+  const socialRef = ref(database, "SocialLinks/");
+  
+  const faceClick = ()=>{
+    window.open(social.facebook,'_blank')
+  }
+  const instaClick = ()=>{
+    window.open(social.instagram,'_blank')
+  }
+  const linkClick = ()=>{
+    window.open(social.linkedin,'_blank')
+  }
+  useEffect(()=>{
+    onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      setData(data);
+    });
+
+    onValue(socialRef, (snapshot) => {
+      const data = snapshot.val();
+      setSocial(data);
+    });
+  },[])
   return (
     <Box
       sx={{
         maxWidth: "336px",
         width: "100%",
         background:
-          "url('https://firebasestorage.googleapis.com/v0/b/agumentik-company.appspot.com/o/P90410286-the-new-bmw-2-series-gran-coup-black-shadow-edition-12-2020-2250px.jpg?alt=media&token=90f8b480-3c3c-4126-808f-35fde5f99c26')",
+          `url("${data.leftBackgroundImg}")`,
         backgroundSize: "cover",
         textAlign: "left",
-        minHeight:"91vh",
-        position :"relative"
+        minHeight: "91vh",
+        position: "relative",
       }}
     >
       <Box sx={{ background: "rgba(0, 0, 0, 0.5)", padding: "24px" }}>
@@ -23,22 +50,20 @@ const HomeSideBar = () => {
           sx={{
             color: "white",
             fontWeight: "bolder",
-            fonsize: "40px",
             marginBottom: "24px",
           }}
+          fontSize='38px'
         >
-          CARTAGENA DRIFT
-          <br /> SCHOOL
+          {data.title}
         </Typography>
         <Typography sx={{ color: "white", marginTop: "18px" }}>
-          The first professional drifting school in Spain
+          {data.content1}
         </Typography>
         <Typography sx={{ color: "white", marginTop: "18px" }}>
-          We have everything to teach you and do everything to give you a taste
-          of drifting.
+        {data.content2}
         </Typography>
         <Typography sx={{ color: "white", marginTop: "18px" }}>
-          Cartagena's unique track combines all these possiblities.
+        {data.content3}
         </Typography>
 
         <Box
@@ -51,7 +76,7 @@ const HomeSideBar = () => {
         >
           <Box>
             <Typography variant="h6" sx={{ color: "#ffe900" }}>
-              100+
+              {data.brokenEngines}+
             </Typography>
             <Typography sx={{ fontSize: "12px", color: "white" }}>
               Broken engines
@@ -59,7 +84,7 @@ const HomeSideBar = () => {
           </Box>
           <Box>
             <Typography variant="h6" sx={{ color: "#ffe900" }}>
-              2500+
+              {data.burntWheels}+
             </Typography>
             <Typography sx={{ fontSize: "12px", color: "white" }}>
               Burnt wheels
@@ -67,7 +92,7 @@ const HomeSideBar = () => {
           </Box>
           <Box>
             <Typography variant="h6" sx={{ color: "#ffe900" }}>
-              &gt;200
+              &gt;{data.podium}
             </Typography>
             <Typography sx={{ fontSize: "12px", color: "white" }}>
               Took the podium
@@ -75,20 +100,39 @@ const HomeSideBar = () => {
           </Box>
           <Box>
             <Typography variant="h6" sx={{ color: "#ffe900" }}>
-              100%
+              {data.satisfiedCus}%
             </Typography>
             <Typography sx={{ fontSize: "12px", color: "white" }}>
               Satisfied customers
             </Typography>
           </Box>
         </Box>
-        <Box sx={{display:"flex",justifyContent:"space-between",marginTop:"24px",marginBottom:"7px"}}>
-            <FacebookIcon  fontSize="large" sx={{color:"#0883e8",cursor:"pointer"}}/>
-            <InstagramIcon  fontSize="large" sx={{color:"#e83a55",cursor:"pointer"}}/>
-            <LinkedInIcon  fontSize="large" sx={{color:"#0073b1",cursor:"pointer"}}/>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "24px",
+            marginBottom: "7px",
+          }}
+        >
+          <FacebookIcon
+          onClick={faceClick}
+            fontSize="large"
+            sx={{ color: "#0883e8", cursor: "pointer" }}
+          />
+          <InstagramIcon
+          onClick={instaClick}
+            fontSize="large"
+            sx={{ color: "#e83a55", cursor: "pointer" }}
+          />
+          <LinkedInIcon
+          onClick={linkClick}
+            fontSize="large"
+            sx={{ color: "#0073b1", cursor: "pointer" }}
+          />
         </Box>
       </Box>
-      <Box sx={{ width: "100%", background: "rgba(0, 0, 0, 0.5)"}}>
+      <Box sx={{ width: "100%", background: "rgba(0, 0, 0, 0.5)" }}>
         <Button
           sx={{
             backgroundColor: "#ffe900",
@@ -98,7 +142,11 @@ const HomeSideBar = () => {
             textTransform: "none",
             fontSize: "13px",
             padding: "16px",
-            ":hover":{backgroundColor:"#ffe400"},
+            ":hover": { backgroundColor: "#ffe400" },
+            position:"absolute",
+            left:"0",
+            right:"0",
+            bottom:"0"
           }}
         >
           Submit your application

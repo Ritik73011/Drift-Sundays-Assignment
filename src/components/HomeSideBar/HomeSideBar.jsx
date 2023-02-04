@@ -8,7 +8,7 @@ const HomeSideBar = () => {
         maxWidth: "336px",
         width: "100%",
         background:
-          "url('https://firebasestorage.googleapis.com/v0/b/agumentik-company.appspot.com/o/app%20icon1.jpg?alt=media&token=3e48c8c7-75c1-4f0b-b6e5-6a8552fec011')",
+          "url('https://firebasestorage.googleapis.com/v0/b/agumentik-company.appspot.com/o/P90410286-the-new-bmw-2-series-gran-coup-black-shadow-edition-12-2020-2250px.jpg?alt=media&token=90f8b480-3c3c-4126-808f-35fde5f99c26')",
         backgroundSize: "cover",
         textAlign: "left",
         minHeight:"91vh",

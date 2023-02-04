@@ -1,6 +1,17 @@
 import { Box, Typography, Slide, Button } from "@mui/material";
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import {database,ref,onValue} from '../config/config'
+import { useEffect, useState } from "react";
 const Service = () => {
+  const [data,setData] = useState({});
+  const starCountRef = ref(database, "Service/");
+
+  useEffect(()=>{
+    onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      setData(data);
+    });
+  },[])
   return (
     <Box sx={{ textAlign: "left", padding: "40px 32px" }}>
       <Box sx={{}}>
@@ -26,12 +37,7 @@ const Service = () => {
             </Typography>
           </Box>
           <Box sx={{ width: "100%" }}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur
-            error ipsa, ab modi neque magnam rem blanditiis, aliquid dolores ut
-            temporibus incidunt voluptates sit explicabo corrupti eaque
-            repellat. Voluptatum, aperiam porro explicabo fugiat blanditiis
-            repellendus iure sapiente unde et architecto nostrum animi
-            cupiditate quas magni.
+            {data.aboutDrift}
           </Box>
         </Box>
       </Slide>
@@ -47,7 +53,7 @@ const Service = () => {
                 color: "darkgrey",
               }}
             >
-              {"hondacivic (hetchback vi)"}
+              {data.carName}
             </Typography>
           </Box>
 
@@ -63,7 +69,7 @@ const Service = () => {
               >
                 <img
                   style={{ width: "100%" }}
-                  src="https://firebasestorage.googleapis.com/v0/b/agumentik-company.appspot.com/o/screen-0.jpg?alt=media&token=58d3b19f-5258-4ee8-b395-2ecdf82651ea"
+                  src={data.carImg}
                   alt="green car"
                 />
                 <Typography
@@ -77,7 +83,7 @@ const Service = () => {
                     borderRadius: "0 0 0 8px",
                   }}
                 >
-                  200€
+                  {data.carPrice}€
                 </Typography>
               </Box>
               <Box>
@@ -89,19 +95,11 @@ const Service = () => {
                     fontSize: "32px",
                   }}
                 >
-                  just Rent and drive
+                  {data.carTitle}
                 </Typography>
 
                 <Typography sx={{ marginTop: "10px" }}>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Aperiam enim, saepe consectetur veniam facilis deserunt
-                  laborum hic sed aspernatur placeat et harum! Beatae accusamus
-                  eveniet aspernatur rerum a praesentium placeat, iusto vel id
-                  sed aliquam. Id rerum omnis quos suscipit quibusdam, quod
-                  alias. Quibusdam soluta doloremque quod. Magnam dolore
-                  deleniti est nemo praesentium temporibus in perspiciatis totam
-                  eum enim nihil quidem tempore fuga incidunt, porro iste libero
-                  autem quia commodi.
+                 {data.aboutCar}
                 </Typography>
               </Box>
             </Box>
@@ -110,7 +108,7 @@ const Service = () => {
               <Typography>Manual Transmission</Typography>
               <Box sx={{display:"flex",gap:"16px",marginTop:"16px"}}>
                     <AccessTimeIcon/>
-                    <Typography>30 minutes of theory and 15 minutes of practise</Typography>
+                    <Typography>{data.duration}</Typography>
               </Box>
             </Box>
 

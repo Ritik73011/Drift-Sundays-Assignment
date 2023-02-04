@@ -1,9 +1,10 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography,Slide } from "@mui/material";
 import React from "react";
 
 const HomeRightSide = () => {
   return (
     <Box sx={{ width: "100%" }}>
+      <Slide direction="down" in mountOnEnter unmountOnExit>
       <Box
         sx={{
           minHeight: "73vh",
@@ -31,6 +32,8 @@ const HomeRightSide = () => {
           />
         </video>
       </Box>
+      </Slide>
+      <Slide direction="up" in mountOnEnter unmountOnExit>
       <Box
         sx={{
           display: "flex",
@@ -108,6 +111,7 @@ const HomeRightSide = () => {
           </Box>
         </Box>
       </Box>
+      </Slide>
     </Box>
   );
 };

@@ -1,8 +1,22 @@
 import logo from "../../assests/logo.png";
 import { Box, ListItemButton, Typography } from "@mui/material";
 import "./Navbar.css";
+import {useNavigate} from 'react-router-dom'
 import ShortTextIcon from "@mui/icons-material/ShortText";
 const Navbar = () => {
+  const navigate = useNavigate();
+  const homeClick = ()=>{
+    navigate('/');
+  }
+  const serviceClick = ()=>{
+    navigate('/service');
+  }
+  const contactClick = ()=>{
+    navigate('/contact')
+  }
+  const adminClick = ()=>{
+    navigate('/admin');
+  }
   return (
     <Box sx={{ display: "flex" }}>
       <Box
@@ -20,10 +34,10 @@ const Navbar = () => {
       </Box>
       <Box sx={{ display: "flex", justifyContent: "center", width: "100%" }}>
         <Box sx={{ display: "flex", gap: "10px" }}>
-          <ListItemButton sx={{color:"#5e5e5e"}}>Home</ListItemButton>
-          <ListItemButton sx={{color:"#5e5e5e"}}>Service</ListItemButton>
-          <ListItemButton sx={{color:"#5e5e5e"}}>Contact</ListItemButton>
-          <ListItemButton sx={{color:"#5e5e5e"}}>Admin</ListItemButton>
+          <ListItemButton onClick={homeClick} sx={{color:"#5e5e5e"}}>Home</ListItemButton>
+          <ListItemButton onClick={serviceClick} sx={{color:"#5e5e5e"}}>Service</ListItemButton>
+          <ListItemButton onClick={contactClick} sx={{color:"#5e5e5e"}}>Contact</ListItemButton>
+          <ListItemButton onClick={adminClick} sx={{color:"#5e5e5e"}}>Admin</ListItemButton>
         </Box>
       </Box>
 

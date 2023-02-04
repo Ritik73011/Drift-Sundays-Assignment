@@ -1,6 +1,8 @@
 import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 const HomeSideBar = () => {
   return (
     <Box
@@ -80,9 +82,13 @@ const HomeSideBar = () => {
             </Typography>
           </Box>
         </Box>
+        <Box sx={{display:"flex",justifyContent:"space-between",marginTop:"24px",marginBottom:"7px"}}>
+            <FacebookIcon  fontSize="large" sx={{color:"#0883e8",cursor:"pointer"}}/>
+            <InstagramIcon  fontSize="large" sx={{color:"#e83a55",cursor:"pointer"}}/>
+            <LinkedInIcon  fontSize="large" sx={{color:"#0073b1",cursor:"pointer"}}/>
+        </Box>
       </Box>
-
-      <Box sx={{ width: "100%", background: "rgba(0, 0, 0, 0.5)",position:"absolute",left:"0",right:"0",bottom:"0"}}>
+      <Box sx={{ width: "100%", background: "rgba(0, 0, 0, 0.5)"}}>
         <Button
           sx={{
             backgroundColor: "#ffe900",

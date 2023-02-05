@@ -57,7 +57,7 @@ const Contact = () => {
     else{
       set(ref(database, 'users/'+inputData.number), {
         name: inputData.name,
-        email: inputData.number,
+        number: inputData.number,
       });
       alert("thanku😊 we will contact you soon...")
       handleClose();

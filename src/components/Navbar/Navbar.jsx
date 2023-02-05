@@ -15,7 +15,7 @@ const Navbar = () => {
     navigate('/contact')
   }
   const adminClick = ()=>{
-    navigate('/admin');
+    navigate('/admin-dashboard');
   }
   return (
     <Box sx={{ display: "flex" }}>

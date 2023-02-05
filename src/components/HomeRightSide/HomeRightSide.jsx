@@ -21,7 +21,7 @@ const HomeRightSide = () => {
           minHeight: "73vh",
           maxHeight: "73vh",
           background:
-            "url('https://firebasestorage.googleapis.com/v0/b/agumentik-company.appspot.com/o/car-optics-view-through-smoke-black-background-color-lighting-adaptiver-led-free-video.jpg?alt=media&token=36c6892c-a713-4026-9f39-5a9d1da0f3e5')",
+            `url('${data.mainVideoCoverImg}')`,
           backgroundSize: "cover",
         }}
       >

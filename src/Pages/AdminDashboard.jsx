@@ -57,8 +57,8 @@ export default function BasicTabs() {  const [value, setValue] = React.useState(
           <Tab label="Edit Home Page" {...a11yProps(0)} />
           <Tab label="Edit Service Page" {...a11yProps(1)} />
           <Tab label="Edit Contact Page" {...a11yProps(2)} />
-          <Tab label="Edit Social Icons" {...a11yProps(3)} />
-          <Tab label="Contact Request" {...a11yProps(4)} />
+          <Tab label="Edit Social Links" {...a11yProps(3)} />
+          <Tab label="Contact Requests" {...a11yProps(4)} />
           <Tab label="Add Admin" {...a11yProps(5)} />
         </Tabs>
       </Box>

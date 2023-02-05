@@ -5,7 +5,11 @@ import jspdf from "jspdf";
 import "jspdf-autotable";
 const ContactRequest = () => {
   const starCountRef = ref(database, "users/");
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({
+    1010:{
+      name:"No Data Found"
+    }
+  });
 
   let style = {
     padding: "8px",
@@ -41,7 +45,9 @@ const ContactRequest = () => {
   useEffect(() => {
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
-      setData(data);
+      if(data){
+        setData(data);
+      }
     });
   }, []);
   return (
@@ -74,7 +80,7 @@ const ContactRequest = () => {
                 );
               })
             ) : (
-              <tr></tr>
+              <tr><td>No Request Found</td></tr>
             )}
           </tbody>
         </table>

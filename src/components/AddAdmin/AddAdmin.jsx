@@ -35,7 +35,7 @@ const AddAdmin = () => {
             email: data.email,
             password: data.password,
         });
-        alert("admin added, now you can login with this credentials...");
+        alert("admin added, now you can login with this credentials. REFRESH for LOGOUT...");
     }
   };
   return (

@@ -1,10 +1,11 @@
-import { Box, Typography,Slide } from "@mui/material";
+import { Box, Typography,Slide, useMediaQuery } from "@mui/material";
 import {database,ref,onValue} from '../../config/config'
 import { useEffect, useState } from "react";
 const HomeRightSide = () => {
   const [data,setData] = useState({});
   const starCountRef = ref(database, "Home/");
   const [video,setVideo] = useState();
+  const media = useMediaQuery("(max-width:768px)");
 
   useEffect(()=>{
     onValue(starCountRef, (snapshot) => {
@@ -14,8 +15,8 @@ const HomeRightSide = () => {
     });
   },[])
   return (
-    <Box sx={{ width: "100%" }}>
-      <Slide direction="down" in mountOnEnter unmountOnExit>
+    <Box sx={{ width: "100%",order:media?"1":"2" }}>
+      <Slide direction="up" in mountOnEnter unmountOnExit>
       <Box
         sx={{
           minHeight: "73vh",

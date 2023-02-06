@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Button, Slide, Typography,useMediaQuery } from "@mui/material";
 import { Box } from "@mui/system";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -10,6 +10,7 @@ const HomeSideBar = () => {
   const [social,setSocial] = useState({});
   const starCountRef = ref(database, "Home/");
   const socialRef = ref(database, "SocialLinks/");
+  const media = useMediaQuery("(max-width:768px)");
   
   const faceClick = ()=>{
     window.open(social.facebook,'_blank')
@@ -32,9 +33,10 @@ const HomeSideBar = () => {
     });
   },[])
   return (
+    <Slide direction="down" in mountOnEnter unmountOnExit>
     <Box
       sx={{
-        maxWidth: "336px",
+        maxWidth: media?"100%":"336px",
         width: "100%",
         background:
           `url("${data.leftBackgroundImg}")`,
@@ -42,6 +44,7 @@ const HomeSideBar = () => {
         textAlign: "left",
         minHeight: "91vh",
         position: "relative",
+        order:media?"2":"1"
       }}
     >
       <Box sx={{ background: "rgba(0, 0, 0, 0.5)", padding: "24px" }}>
@@ -107,6 +110,7 @@ const HomeSideBar = () => {
             </Typography>
           </Box>
         </Box>
+        <Slide direction="left" in mountOnEnter unmountOnExit>
         <Box
           sx={{
             display: "flex",
@@ -131,6 +135,7 @@ const HomeSideBar = () => {
             sx={{ color: "#0073b1", cursor: "pointer" }}
           />
         </Box>
+        </Slide>
       </Box>
       <Box sx={{ width: "100%", background: "rgba(0, 0, 0, 0.5)" }}>
         <Button
@@ -153,6 +158,7 @@ const HomeSideBar = () => {
         </Button>
       </Box>
     </Box>
+    </Slide>
   );
 };
 

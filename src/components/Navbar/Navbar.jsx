@@ -37,7 +37,7 @@ const Navbar = () => {
     setState(true);
   };
   return (
-    <Box sx={{ display: "flex", position: "relative",background:media?"#070707":"white" }}>
+    <Box sx={{ display: "flex", position: "fixed",left:"0",right:"0",top:"0",zIndex:"10",background:"#070707",color:"white" }}>
       <Box
         sx={{
           maxWidth: "320px",
@@ -59,16 +59,16 @@ const Navbar = () => {
         }}
       >
         <Box sx={{ display: "flex", gap: "10px" }}>
-          <ListItemButton onClick={homeClick} sx={{ color: "#5e5e5e" }}>
+          <ListItemButton onClick={homeClick} sx={{ color: "#c6c2c2" }}>
             Home
           </ListItemButton>
-          <ListItemButton onClick={serviceClick} sx={{ color: "#5e5e5e" }}>
+          <ListItemButton onClick={serviceClick} sx={{ color: "#c6c2c2" }}>
             Service
           </ListItemButton>
-          <ListItemButton onClick={contactClick} sx={{ color: "#5e5e5e" }}>
+          <ListItemButton onClick={contactClick} sx={{ color: "#c6c2c2" }}>
             Contact
           </ListItemButton>
-          <ListItemButton onClick={adminClick} sx={{ color: "#5e5e5e" }}>
+          <ListItemButton onClick={adminClick} sx={{ color: "#c6c2c2" }}>
             Admin
           </ListItemButton>
         </Box>

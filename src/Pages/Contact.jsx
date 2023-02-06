@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography, useMediaQuery } from "@mui/material";
 import AddIcCallIcon from "@mui/icons-material/AddIcCall";
 import EmailIcon from "@mui/icons-material/Email";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -30,7 +30,8 @@ const Contact = () => {
   const [social, setSocial] = useState({});
   const starCountRef = ref(database, "Contact/");
   const socialRef = ref(database, "SocialLinks/");
-
+  const media = useMediaQuery("(max-width:768px)");
+  
   const faceClick = () => {
     window.open(social.facebook, "_blank");
   };
@@ -83,6 +84,7 @@ const Contact = () => {
         backgroundSize: "cover",
         color: "white",
         minHeight: "91vh",
+        marginTop:media?"51px":"65px"
       }}
     >
       <Box

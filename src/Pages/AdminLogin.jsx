@@ -58,7 +58,7 @@ const AdminLogin = () => {
     <Box
       sx={{
         padding: "24px",
-        marginTop: "24px",
+        marginTop: "65px",
         justifyContent: "center",
         position: "relative",
       }}

@@ -9,6 +9,7 @@ import AdminContact from '../components/AdminContact/AdminContact';
 import AdminSocialIcon from '../components/AdminSocialIcon/AdminSocialIcon';
 import ContactRequest from '../components/ContactRequest/ContactRequest';
 import AddAdmin from '../components/AddAdmin/AddAdmin';
+import { useMediaQuery } from '@mui/material';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -49,9 +50,11 @@ export default function BasicTabs() {  const [value, setValue] = React.useState(
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const media = useMediaQuery("(max-width:768px)");
+  
 
   return (
-    <Box sx={{ width: '100%',marginTop:"16px" }}>
+    <Box sx={{ width: '100%',marginTop:media?"51px":"65px" }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider',display:"flex",justifyContent:"center" }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Edit Home Page" {...a11yProps(0)} />

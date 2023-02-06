@@ -1,11 +1,12 @@
-import { Box, Typography, Slide, Button } from "@mui/material";
+import { Box, Typography, Slide, Button, useMediaQuery } from "@mui/material";
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import {database,ref,onValue} from '../config/config'
 import { useEffect, useState } from "react";
 const Service = () => {
   const [data,setData] = useState({});
   const starCountRef = ref(database, "Service/");
-
+  const media = useMediaQuery("(max-width:768px)");
+  
   useEffect(()=>{
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
@@ -13,7 +14,7 @@ const Service = () => {
     });
   },[])
   return (
-    <Box sx={{ textAlign: "left", padding: "40px 32px" }}>
+    <Box sx={{ textAlign: "left", padding: "40px 32px",marginTop:media?"51px":"65px" }}>
       <Box sx={{}}>
         <Typography
           variant="h3"
@@ -23,7 +24,7 @@ const Service = () => {
         </Typography>
       </Box>
       <Slide direction="down" in mountOnEnter unmountOnExit>
-        <Box sx={{ display: "flex", width: "100%", marginTop: "24px" }}>
+        <Box sx={{ display: media?"grid":"flex", width: "100%", marginTop: "24px" }}>
           <Box sx={{ maxWidth: "320px", width: "100%" }}>
             <Typography
               sx={{
@@ -43,7 +44,7 @@ const Service = () => {
       </Slide>
 
       <Slide direction="up" in mountOnEnter unmountOnExit>
-        <Box sx={{ display: "flex", width: "100%", marginTop: "24px" }}>
+        <Box sx={{ display: media?"grid":"flex", width: "100%", marginTop: "24px" }}>
           <Box sx={{ maxWidth: "320px", width: "100%" }}>
             <Typography
               sx={{
@@ -58,7 +59,7 @@ const Service = () => {
           </Box>
 
           <Box sx={{ width: "100%" }}>
-            <Box sx={{ display: "flex", width: "100%", gap: "16px" }}>
+            <Box sx={{ display: media?"grid":"flex", width: "100%", gap: "16px" }}>
               <Box
                 sx={{
                   maxWidth: "300px",

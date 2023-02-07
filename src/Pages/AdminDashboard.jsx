@@ -10,6 +10,7 @@ import AdminSocialIcon from '../components/AdminSocialIcon/AdminSocialIcon';
 import ContactRequest from '../components/ContactRequest/ContactRequest';
 import AddAdmin from '../components/AddAdmin/AddAdmin';
 import { useMediaQuery } from '@mui/material';
+import AdminApplication from '../components/AdminApplicationReq/AdminApplication';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -62,7 +63,8 @@ export default function BasicTabs() {  const [value, setValue] = React.useState(
           <Tab label="Edit Contact Page" {...a11yProps(2)} />
           <Tab label="Edit Social Links" {...a11yProps(3)} />
           <Tab label="Contact Requests" {...a11yProps(4)} />
-          <Tab label="Add Admin" {...a11yProps(5)} />
+          <Tab label="Application Requests" {...a11yProps(5)} />
+          <Tab label="Add Admin" {...a11yProps(6)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -91,6 +93,11 @@ export default function BasicTabs() {  const [value, setValue] = React.useState(
         </Box>
       </TabPanel>
       <TabPanel value={value} index={5}>
+      <Box sx={{margin:"16px"}}>
+          <AdminApplication/>
+        </Box>
+      </TabPanel>
+      <TabPanel value={value} index={6}>
       <Box sx={{margin:"16px"}}>
           <AddAdmin/>
         </Box>

@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography, useMediaQuery } from "@mui/material";
+import { Box, Button, Slide, TextField, Typography, useMediaQuery } from "@mui/material";
 import AddIcCallIcon from "@mui/icons-material/AddIcCall";
 import EmailIcon from "@mui/icons-material/Email";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -101,11 +101,13 @@ const Contact = () => {
         >
           CONTACTS
         </Typography>
-
+        <Slide direction="down" in mountOnEnter unmountOnExit>
         <Typography sx={{ margin: "16px 0" }}>{data.aboutCompany}</Typography>
+        </Slide>
         <Typography sx={{ paddingTop: "16px" }}>
           We work daily from 9am till 6pm.
         </Typography>
+        <Slide direction="up" in mountOnEnter unmountOnExit>
         <Box
           sx={{
             display: "flex",
@@ -117,6 +119,8 @@ const Contact = () => {
           <AddIcCallIcon sx={{ color: "#ffe900" }} />
           <Typography sx={{ color: "#ffe900" }}>+91{data.phoneNum}</Typography>
         </Box>
+        </Slide>
+        <Slide direction="up" in mountOnEnter unmountOnExit>
         <Box
           sx={{
             display: "flex",
@@ -128,15 +132,14 @@ const Contact = () => {
           <EmailIcon sx={{ color: "#ffe900" }} />
           <Typography sx={{ color: "#ffe900" }}>{data.email}</Typography>
         </Box>
-
+            </Slide>
+            <Slide direction="left" in mountOnEnter unmountOnExit>
         <Box
           sx={{
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "start",
             gap: "24px",
-            background: "rgba(0,0,0,0.7)",
-            padding: "16px",
-            marginTop: "48px",
+            marginTop: "24px",
           }}
         >
           <FacebookIcon
@@ -155,9 +158,9 @@ const Contact = () => {
             sx={{ color: "#0073b1", cursor: "pointer" }}
           />
         </Box>
-
+        </Slide>
         <Box
-          sx={{ display: "flex", justifyContent: "center", marginTop: "48px" }}
+          sx={{ display: "flex", justifyContent: "start", marginTop: "48px" }}
         >
           <Button
             sx={{
